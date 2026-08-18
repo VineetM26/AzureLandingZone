@@ -9,7 +9,7 @@ rgs = {
     location = "Central India"
   }
   rg3 = {
-    name     = "Le ek aur RG"
+    name     = "Le-ek-aur-RG"
     location = "Central India"
   }
 }
