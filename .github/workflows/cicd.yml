@@ -1,0 +1,48 @@
+name: Terraform Plan (Feature Branch)
+
+on:
+  push:
+    branches:
+      - feature1 # ← अपनी feature branch का नाम डालो
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terraform-plan:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repo
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Setup Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.6.0
+
+      # 3. Azure Login (hardcoded creds - testing only)
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: |
+            {
+              "clientId": "0549092e-e583-4b2e-836d-0b989c1113eb",
+              "clientSecret": "2fb99b6c-e6c9-4bf4-84f8-5953c37553c5",
+              "subscriptionId": "42a164d5-8e3e-4b00-9cd7-14e58100c64d",
+              "tenantId": "617a262c-d3a9-40d4-8b46-1d889f22b189"
+            }
+
+      # 4. Terraform Init
+      - name: Terraform Init
+        run: terraform init
+
+      # 5. Terraform Validate
+      - name: Terraform Validate
+        run: terraform validate
+
+      # 6. Terraform Plan
+      - name: Terraform Plan
+        run: terraform plan
