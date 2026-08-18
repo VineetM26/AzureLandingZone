@@ -1,6 +1,7 @@
 variable "vms" {}
 
 resource "azurerm_network_interface" "nic" {
+  # depends_on          = [azurerm_public_ip.pip]
   for_each            = var.vms
   name                = each.value.nic_name
   location            = each.value.location
