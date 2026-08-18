@@ -6,6 +6,7 @@ resource "azurerm_public_ip" "pip" {
   location            = each.value.location
   resource_group_name = each.value.rg_name
 
-  allocation_method = "Static"   # या "Dynamic" अगर auto assign चाहिए
-  sku               = "Standard" # "Basic" भी use कर सकते हो, लेकिन Standard recommended है
+  allocation_method = "Static"
+  sku               = "Standard"
 }
+

@@ -1,7 +1,7 @@
-# module "resource_group" {
-#   source = "../../modules/resource_group"
-#   rgs    = var.rgs
-# }
+module "resource_group" {
+  source = "../../modules/resource_group"
+  rgs    = var.rgs
+}
 
 # module "virtual_network" {
 #   depends_on = [module.resource_group]
