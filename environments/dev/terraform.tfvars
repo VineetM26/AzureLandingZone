@@ -12,6 +12,10 @@ rgs = {
     name     = "Le-ek-aur-RG"
     location = "Central India"
   }
+  rg4 = {
+    name     = "cicd-testing-rg"
+    location = "Central India"
+  }
 }
 
 vnets = {

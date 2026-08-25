@@ -1,9 +1,12 @@
-name: Terraform Plan
+name: Terraform Plan & Apply
 
 on:
   push:
     branches:
       - feature1
+  pull_request:
+    branches:
+      - main
 
 jobs:
   terraform-plan:
@@ -19,12 +22,13 @@ jobs:
         uses: azure/login@v1
         with:
           creds: |
-            {
+             {
               "clientId": "68462574-574a-4446-a2e0-85187be1e52c",
               "clientSecret": "Eho8Q~A4w_ehNh5J2jH_-bHYutEqtKbHoyZlzbRB",
               "subscriptionId": "42a164d5-8e3e-4b00-9cd7-14e58100c64d",
               "tenantId": "617a262c-d3a9-40d4-8b46-1d889f22b189"
             }
+
 
       - name: Terraform Init
         run: terraform init
@@ -36,4 +40,36 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan
+        working-directory: ./environments/dev
+
+  terraform-apply:
+    needs: terraform-plan
+    runs-on: ubuntu-latest
+    environment: Production   # ← यहाँ environment का नाम वही होना चाहिए जो तुमने GitHub में configure किया है
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: |
+             {
+              "clientId": "68462574-574a-4446-a2e0-85187be1e52c",
+              "clientSecret": "Eho8Q~A4w_ehNh5J2jH_-bHYutEqtKbHoyZlzbRB",
+              "subscriptionId": "42a164d5-8e3e-4b00-9cd7-14e58100c64d",
+              "tenantId": "617a262c-d3a9-40d4-8b46-1d889f22b189"
+            }
+
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ./environments/dev
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
         working-directory: ./environments/dev
