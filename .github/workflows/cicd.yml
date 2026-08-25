@@ -22,13 +22,12 @@ jobs:
         uses: azure/login@v1
         with:
           creds: |
-             {
-              "clientId": "68462574-574a-4446-a2e0-85187be1e52c",
-              "clientSecret": "Eho8Q~A4w_ehNh5J2jH_-bHYutEqtKbHoyZlzbRB",
-              "subscriptionId": "42a164d5-8e3e-4b00-9cd7-14e58100c64d",
-              "tenantId": "617a262c-d3a9-40d4-8b46-1d889f22b189"
+            {
+             "clientId": "68462574-574a-4446-a2e0-85187be1e52c",
+             "clientSecret": "Eho8Q~A4w_ehNh5J2jH_-bHYutEqtKbHoyZlzbRB",
+             "subscriptionId": "42a164d5-8e3e-4b00-9cd7-14e58100c64d",
+             "tenantId": "617a262c-d3a9-40d4-8b46-1d889f22b189"
             }
-
 
       - name: Terraform Init
         run: terraform init
@@ -45,7 +44,7 @@ jobs:
   terraform-apply:
     needs: terraform-plan
     runs-on: ubuntu-latest
-    environment: Production   # ← यहाँ environment का नाम वही होना चाहिए जो तुमने GitHub में configure किया है
+    environment: Production # ← यहाँ environment का नाम वही होना चाहिए जो तुमने GitHub में configure किया है
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout repository
@@ -58,13 +57,12 @@ jobs:
         uses: azure/login@v1
         with:
           creds: |
-             {
-              "clientId": "68462574-574a-4446-a2e0-85187be1e52c",
-              "clientSecret": "Eho8Q~A4w_ehNh5J2jH_-bHYutEqtKbHoyZlzbRB",
-              "subscriptionId": "42a164d5-8e3e-4b00-9cd7-14e58100c64d",
-              "tenantId": "617a262c-d3a9-40d4-8b46-1d889f22b189"
+            {
+             "clientId": "68462574-574a-4446-a2e0-85187be1e52c",
+             "clientSecret": "Eho8Q~A4w_ehNh5J2jH_-bHYutEqtKbHoyZlzbRB",
+             "subscriptionId": "42a164d5-8e3e-4b00-9cd7-14e58100c64d",
+             "tenantId": "617a262c-d3a9-40d4-8b46-1d889f22b189"
             }
-
 
       - name: Terraform Init
         run: terraform init
