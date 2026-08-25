@@ -9,7 +9,11 @@ rgs = {
     location = "Central India"
   }
   rg3 = {
-    name     = "Le ek aur RG"
+    name     = "Le-ek-aur-RG"
+    location = "Central India"
+  }
+  rg4 = {
+    name     = "cicd-testing-rg"
     location = "Central India"
   }
 }
